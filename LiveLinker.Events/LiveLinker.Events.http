@@ -1,0 +1,6 @@
+@LiveLinker.Events_HostAddress = http://localhost:5007
+
+GET {{LiveLinker.Events_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

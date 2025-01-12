@@ -1,0 +1,72 @@
+# Build Folders
+bin/
+obj/
+out/
+
+# User-Specific Files
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+# Logs
+*.log
+*.tlog
+
+# Compiled DLLs, PDBs, etc.
+*.dll
+*.exe
+*.pdb
+*.mdb
+*.cache
+
+# Visual Studio Code files
+.vscode/
+.vscode/settings.json
+
+# Visual Studio working directory settings
+.vs/
+
+# Resharper Files
+*.DotSettings.user
+
+# Packages
+packages/
+*.nupkg
+*.snupkg
+
+# Temporary Files
+*.swp
+*~
+
+# ASP.NET Temporary Files
+Project.lock.json
+project.fragment.lock.json
+*.csproj.user
+*.css.map
+*.min.css
+*.min.js
+wwwroot/node_modules/
+wwwroot/lib/
+
+# Coverage Results
+coverage/
+*.coverage
+*.coveragexml
+
+# SQL Server files
+*.mdf
+*.ldf
+
+
+# Configuration Files
+
+appsettings.Development.json
+
+# Secrets
+.env
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
