@@ -1,6 +1,8 @@
 using LiveLinker.Events.LiveLinker.Events.Core.Entities;
 using LiveLinker.Events.LiveLinker.Events.Core.Interfaces;
 using LiveLinker.Events.LiveLinker.Events.Infrastructure.Data;
+using LiveLinker.Events.LiveLinker.Events.Mapper;
+using LiveLinker.Events.LiveLinker.Events.Service.Models;
 
 namespace LiveLinker.Events.LiveLinker.Events.Infrastructure.Repository{
 
@@ -11,27 +13,41 @@ namespace LiveLinker.Events.LiveLinker.Events.Infrastructure.Repository{
         public EventsRepository(BaseDbContext dbContext){
             _dbContext = dbContext?? throw new ArgumentNullException(nameof(dbContext));
         }
-        public Task<Event> AddAsync(Event entity)
+
+        public async Task<EventModel> AddRecordsAsync(Event entity)
+        {
+             try{
+                var records = EventsMapper.ToDB(entity);
+
+                _dbContext.Events.Add(records);
+               
+                await _dbContext.SaveChangesAsync();
+
+                var responseModel = EventsMapper.ToModel(records);
+
+                return responseModel;
+            }
+            catch(Exception ex){
+                throw new Exception("Something went wrong", ex);
+            }
+        }
+
+        public Task<bool> DeleteRecordsAsync<TKey>(TKey id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteAsync<TKey>(TKey id)
+        public Task<List<EventModel>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Event>> GetAllAsync()
+        public Task<EventModel> GetByIdAsync<TKey>(TKey id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Event> GetByIdAsync<TKey>(TKey id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Event> UpdateAsync(Event entity)
+        public Task<EventModel> UpdateRecordsAsync(Event entity)
         {
             throw new NotImplementedException();
         }
