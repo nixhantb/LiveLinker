@@ -4,7 +4,9 @@ using LiveLinker.Events.LiveLinker.Events.Core.Interfaces;
 using LiveLinker.Events.LiveLinker.Events.Infrastructure.Data;
 using LiveLinker.Events.LiveLinker.Events.Infrastructure.Repository;
 using LiveLinker.Events.LiveLinker.Events.Validators;
+using LiveLinker.Events.LiveLinker.Events.Middlewares.ExceptionHandling;
 using Microsoft.EntityFrameworkCore;
+
 
 
 
@@ -41,9 +43,11 @@ if (app.Environment.IsDevelopment())
 }
 
 
-app.MapControllers();
+
 app.UseHsts();
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
 
+app.UseMiddleware<ExceptionMiddleware>();
+app.MapControllers();
 app.Run();
