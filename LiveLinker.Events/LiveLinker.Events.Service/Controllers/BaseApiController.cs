@@ -26,7 +26,8 @@ namespace LiveLinker.Events.LiveLinker.Events.Service.Controller
 
 
         [HttpPost]
-
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public virtual async Task<IActionResult> CreateAsync([FromBody] TEntity entity)
         {
             try
