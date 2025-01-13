@@ -1,34 +1,42 @@
+
 using LiveLinker.Events.LiveLinker.Events.Core.Entities;
 using LiveLinker.Events.LiveLinker.Events.Core.Interfaces;
 using LiveLinker.Events.LiveLinker.Events.Infrastructure.Data;
 using LiveLinker.Events.LiveLinker.Events.Mapper;
 using LiveLinker.Events.LiveLinker.Events.Service.Models;
 
-namespace LiveLinker.Events.LiveLinker.Events.Infrastructure.Repository{
+
+namespace LiveLinker.Events.LiveLinker.Events.Infrastructure.Repository
+{
 
     public class EventsRepository : IEventRepository
     {
         private readonly BaseDbContext _dbContext;
 
-        public EventsRepository(BaseDbContext dbContext){
-            _dbContext = dbContext?? throw new ArgumentNullException(nameof(dbContext));
+        public EventsRepository(BaseDbContext dbContext)
+        {
+            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
         public async Task<EventModel> AddRecordsAsync(Event entity)
         {
-             try{
+            try
+            {
+                
                 var records = EventsMapper.ToDB(entity);
 
                 _dbContext.Events.Add(records);
-               
+
                 await _dbContext.SaveChangesAsync();
 
                 var responseModel = EventsMapper.ToModel(records);
 
                 return responseModel;
             }
-            catch(Exception ex){
-                throw new Exception("Something went wrong", ex);
+           
+            catch (Exception ex)
+            {
+                throw new Exception("Database operation failed", ex);
             }
         }
 
